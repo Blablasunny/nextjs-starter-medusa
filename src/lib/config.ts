@@ -4,8 +4,12 @@ import Medusa, { FetchArgs, FetchInput } from "@medusajs/js-sdk"
 // Defaults to standard port for Medusa server
 let MEDUSA_BACKEND_URL = "http://localhost:9000"
 
-if (process.env.MEDUSA_BACKEND_URL) {
-  MEDUSA_BACKEND_URL = process.env.MEDUSA_BACKEND_URL
+// Accept the legacy NEXT_PUBLIC_ name as a fallback
+const envBackendUrl =
+  process.env.MEDUSA_BACKEND_URL || process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
+
+if (envBackendUrl) {
+  MEDUSA_BACKEND_URL = envBackendUrl
 }
 
 export const sdk = new Medusa({
